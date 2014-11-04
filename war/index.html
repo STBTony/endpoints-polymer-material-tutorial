@@ -19,22 +19,20 @@
     		// put here your initialisations that need to execute when the DOM and polymer are ready
     		} ); 
     	
-    	function api_init()
-    	{	
+    	function api_init() {	
     		// load your own Cloud Endpoints API here:
     		var protocol = window.location.host.search('localhost')==-1 ? 'https://' : 'http://'
     		gapi.client.load('greetings', 'v1', function() { gapiReady = true } , protocol + window.location.host + '/_ah/api');
     		// put in the callback above the initialisations that need to execute when your API is ready
-        }
+	}
     	
     	// function to call our "greetings" API with a name
-		function do_call(name)
-		{
-			gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
-		        if (!resp.code)
-	  	            alert(resp.text + ' ' + resp.avatarId);
-		        })
-		}
+	function do_call(name) {
+		gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
+	        if (!resp.code)
+  	            alert(resp.text + ' ' + resp.avatarId);
+	        })
+	}
     </script>
     
     <!-- Google API init  -->
