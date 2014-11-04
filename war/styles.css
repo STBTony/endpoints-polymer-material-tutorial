@@ -38,6 +38,7 @@
 		    z-index: 1;
 	    }
 	    
+	    	paper-fab /deep/ #icon       { vertical-align: baseline }
 	    paper-fab /deep/ #icon       { fill: #aaa; transition: 0.3s; }
    	 	paper-fab:hover /deep/ #icon { fill: #03a9f4; }
 		
