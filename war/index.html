@@ -33,15 +33,6 @@
 		var protocol = window.location.host.search('localhost')==-1 ? 'https://' : 'http://' 
 		gapi.client.load('greetings', 'v1', function() {gapiReady = true; do_call('Mr. Jones')}, protocol + window.location.host + '/_ah/api');
 	}
-    	
-	// function to call our "greetings" API with a name
-	function do_call(name) {
-		if (gapiReady)
-			gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
-				if (!resp.code)
-					display_new_card(resp.text, resp.avatarId);
-			})
-	}
 
 	// display a greeting card with a given text and avatar number
 	function display_new_card(text, avatarId) {
@@ -58,6 +49,15 @@
 			card.heading = text;
 			container.appendChild(card);
 		}
+	}
+	
+	// function to call our "greetings" API with a name
+	function do_call(name) {
+		if (gapiReady)
+			gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
+				if (!resp.code)
+					display_new_card(resp.text, resp.avatarId);
+			})
 	}
     </script>
     
