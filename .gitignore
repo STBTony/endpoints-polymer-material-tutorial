@@ -1,3 +1,6 @@
 endpoint-libs
 *.discovery
 war/WEB-INF/appengine-generated
+.idea
+war/WEB-INF/classes
+*.iml
