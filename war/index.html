@@ -4,99 +4,113 @@
      a complete endpoints / polymer app but
      it does not yet use the datastore on
      the backend and polymer data binding
-     on the front end. -->
+     on the front end.
+     Now migrated to polymer 1.0 -->
 
 <html>
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <title>Hello Cloud Endpoints</title>
+    <title>Hello Cloud Endpoints, welcome Polymer 1.0</title>
     <script type="text/javascript">
    
     	var polymerReady = false;
     	var gapiReady    = false;
     	
-	// this will be executed when polymer and the DOM are ready
-	document.addEventListener('polymer-ready', function() {
+    	// this will be executed when polymer and the DOM are ready
+		document.addEventListener('WebComponentsReady', function() {
 
-		polymerReady = true;
-		
-		// call the API when a value is entered into the input box
-		var inputBox    = document.querySelector('paper-input');
-		inputBox.addEventListener('keyup', function(e) {
-			if (e.keyCode == 13)
-				do_call(inputBox.value);
-		});
-	}); 
+			polymerReady = true;
 
-	// load our "greetings" API, we send a first call to the API as soon as it is loaded
-	function api_init()	{
-		var protocol = window.location.host.search('localhost')==-1 ? 'https://' : 'http://' 
-		gapi.client.load('greetings', 'v1', function() {gapiReady = true; do_call('Mr. Jones')}, protocol + window.location.host + '/_ah/api');
-	}
+			// call the API when a value is entered into the input box
+			var inputBox    = document.querySelector('paper-input');
+			inputBox.addEventListener('keyup', function(e) {
+					if (e.keyCode == 13)
+						do_call(inputBox.value);
+				});
 
-	// display a greeting card with a given text and avatar number
-	function display_new_card(text, avatarId) {
-		// in case the dom and polymer are not ready yet, retry in 300ms.
-		if (!polymerReady)
-			window.setTimeout(function(){display_new_card(text, avatarId)}, 300);
-		else {
-			// create a a paper-card programatically
-			var container = document.getElementById('container');
-			var card = document.createElement('paper-card');
-			var icon = new Image();
-			icon.src = "images/avatar-" + (avatarId + 1) + ".svg";
-			card.appendChild(icon);
-			card.heading = text;
-			container.appendChild(card);
+		} );
+    	
+		// load our "greetings" API, we send a first call to the API as soon as it is loaded
+		function api_init() {
+			var protocol = window.location.host.search('localhost')==-1 ? 'https://' : 'http://'
+			gapi.client.load('greetings', 'v1', function() {gapiReady = true; do_call('Mr. Jones')}, protocol + window.location.host + '/_ah/api');
 		}
-	}
+    	
+		// display a greeting card with a given text and avatar number
+		function display_new_card(id, text, avatarId) {
+			// in case the dom and polymer are not ready yet, retry in 300ms.
+			if (!polymerReady)
+				window.setTimeout(function(){display_new_card(id, text, avatarId)}, 300);
+			else {
+				// create a a paper-card programatically
+				var container = document.getElementById('container');
+				var card = document.createElement('paper-card');
+				var icon = new Image();
+				icon.src = "images/avatar-" + (avatarId + 1) + ".svg";
+				// Unfortunately, you have to use Polymer's DOM manipulation APIs
+				// to add children to the light DOM of a polymer element.
+				Polymer.dom(card).appendChild(icon);
+				card.heading = text;
+				container.appendChild(card);
+			}
+		}
 	
-	// function to call our "greetings" API with a name
-	function do_call(name) {
-		if (gapiReady)
-			gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
-				if (!resp.code)
-					display_new_card(resp.text, resp.avatarId);
-			})
-	}
+		// function to call our "greetings" API with a name
+		function do_call(name) {
+			if (gapiReady)
+				gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
+					if (!resp.code)
+						display_new_card(resp.id, resp.text, resp.avatarId);
+				})
+		}
     </script>
     
     <!-- Google API init  -->
     <script src="https://apis.google.com/js/client.js?onload=api_init"></script>
-    
-    <!-- POLYMER init and imports-->
-    <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
-    <link rel="import" href="bower_components/font-roboto/roboto.html">
-    <link rel="import" href="bower_components/core-header-panel/core-header-panel.html">
-    <link rel="import" href="bower_components/core-toolbar/core-toolbar.html">
-    <link rel="import" href="bower_components/paper-button/paper-button.html">
-    <link rel="import" href="bower_components/paper-input/paper-input.html">
-    <link rel="import" href="bower_components/paper-fab/paper-fab.html">
-    <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
-    <link rel="import" href="bower_components/paper-dialog/paper-dialog-transition.html">
-    <link rel="import" href="paper-card.html">
-    
-    <!-- styles specific to this app --> 
-    <link rel="stylesheet" type="text/css" href="styles.css" shim-shadowdom>
+
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Hello Cloud Endpoints / Polymer 1.0</title>
+
+	<!-- POLYMER init and imports-->
+	<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+
+	<link rel="import" href="bower_components/paper-header-panel/paper-header-panel.html">
+	<link rel="import" href="bower_components/paper-toolbar/paper-toolbar.html">
+	<link rel="import" href="bower_components/iron-icons/iron-icons.html">
+	<link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+	<link rel="import" href="bower_components/paper-input/paper-input.html">
+	<link rel="import" href="bower_components/paper-fab/paper-fab.html">
+	<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
+	<link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+	<link rel="import" href="bower_components/paper-button/paper-button.html">
+
+	<link rel="import" href="bower_components/neon-animation/animations/fade-in-animation.html">
+	<link rel="import" href="bower_components/neon-animation/animations/fade-out-animation.html">
+
+	<!-- custom elements in this app -->
+	<link rel="import" href="paper-card.html">
+
+	<!-- styles specific to this app -->
+	<link rel="import" href="styles.html">
 
   </head>
 
-<body unresolved>  
- 
-	<core-header-panel>
-		<core-toolbar>
-			<paper-icon-button icon="menu" onclick="document.querySelector('paper-dialog').toggle()"></paper-icon-button>
-			<div flex>Welcome</div>
-			<paper-input label="Type your name here"></paper-input>
-			<paper-fab icon="cloud" onclick="do_call(document.querySelector('paper-input').value)"></paper-fab>	
-		</core-toolbar>
-		<div id="container" horizontal layout wrap></div>
-	</core-header-panel>
-		
-	<paper-dialog closeSelector="*" transition="paper-dialog-transition-center">
-	  <center>Nothing here... yet</center>
-      <paper-button affirmative autofocus>OK</paper-button>
-    </paper-dialog>
-    
+  <body unresolved>
+
+	  <paper-header-panel>
+		  <paper-toolbar>
+			  <paper-icon-button icon="menu" onclick="document.querySelector('paper-dialog').open()"></paper-icon-button>
+			  <div class="title" >Welcome</div>
+			  <paper-input label="Type your name here"></paper-input>
+		  </paper-toolbar>
+		  <div id="container" class="layout horizontal wrap"></div>
+	  </paper-header-panel>
+	  <paper-fab icon="cloud" onclick="do_call(document.querySelector('paper-input').value)"></paper-fab>
+
+	  <paper-dialog entry-animation="fade-in-animation" exit-animation="fade-out-animation">
+		  <div>Nothing here... yet</div>
+		  <paper-button dialog-confirm autofocus>OK</paper-button>
+	  </paper-dialog>
+
   </body>
 </html>

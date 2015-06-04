@@ -1,0 +1,62 @@
+<style is="custom-style">
+	/* The "custom-style" setting is needed so that Polymer shims custom CSS properties */
+
+	html, body {
+		height: 100%;
+		margin: 0;
+		background-color: #F5F5F5;
+		font-family: Roboto, Helvetica, Arial, sans-serif;
+	}
+
+	paper-toolbar {
+		background-color: #03a9f4;
+	}
+
+	paper-input {
+		margin-bottom: 2.5ex;
+		--paper-input-container-color: rgba(255,255,255, 0.5);
+		--paper-input-container-input-color: white;
+		--paper-input-container-focus-color: rgba(255,255,255, 0.5);
+		margin-right: 50px;
+	}
+
+	paper-fab {
+		position: absolute;
+		top: 36px;
+		right: 7px;
+		color: #aaa;
+		background-color: white;
+		transition: 0.3s;
+	}
+	paper-fab:hover {
+		color: #03a9f4;
+	}
+
+	paper-card {
+		background-color: white;
+		--card-padding: 20px;
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+
+	paper-dialog {
+		padding: 10px;
+		text-align: center;
+	}
+
+	paper-dialog paper-button {
+		margin-top: 10px;
+		margin-bottom: 10px;
+		color: blue;
+	}
+
+	paper-dialog paper-button::shadow paper-ripple {
+		color: #aaa;
+	}
+	    
+	#container {
+		width: 100%;
+		margin: 30px;
+	}
+
+</style>
