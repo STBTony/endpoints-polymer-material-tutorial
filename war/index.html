@@ -59,9 +59,7 @@
 			if (gapiReady)
 				gapi.client.greetings.hello( {'who': name} ).execute(function(resp) {
 					if (!resp.code)
-					{
 						display_new_card(resp.id, resp.text, resp.avatarId);
-					}
 				})
 		}
     </script>
