@@ -59,72 +59,71 @@
 			<content></content>
 		</paper-material>
 	</template>
-
-	<script>
-		Polymer({
-			// name of the element
-			is: 'paper-card',
-			properties: {
-				heading: {
-					type: String,
-					reflectToAttribute: true,
-					value: ""
-				},
-				elevation: {
-					type: Number,
-					reflectToAttribute: true,
-					value: 1
-				},
-				selected: {
-					type: Boolean,
-					value: false
-				}
-			},
-			// gesture listeners: down, up, tap, track
-			listeners: {
-				tap: 'tapAction'
-			},
-			// lifecycle functions: created, attached, detached, ready, attributeChanged
-			// we attach additional listeners here which are not available as Polymer listeners
-			attached: function() {
-				this.addEventListener('mouseenter', function (e) {
-					this.selectAction();
-				});
-				this.addEventListener('mouseleave', function (e) {
-					this.unselectAction();
-				});
-			},
-			// custom functions: anything you want - this is the prototype of your object
-			tapAction: function(e) {
-				if (!this.selected)
-					this.selectAction();
-				else
-					this.unselectAction();
-			},
-			selectAction: function(e) {
-				if (!this.selected)
-				{
-					this.selected = true;
-					this.elevation+=2;
-				}
-			},
-			unselectAction: function(e) {
-				if (this.selected)
-				{
-					this.selected = false;
-					this.elevation-=2;
-				}
-			},
-			closeAction: function(e) {
-				e.stopPropagation();
-				var card = e.target.parentNode.parentNode.parentNode;
-				card.classList.add('closing');
-				var ctrl = document.querySelector('greetings-list');
-				var uid = this.uid;
-				if (ctrl != null)
-					window.setTimeout(function() {ctrl.del(uid);}, 250);
-			}
-		});
-	</script>
-
 </dom-module>
+
+<script>
+	Polymer({
+		// name of the element
+		is: 'paper-card',
+		properties: {
+			heading: {
+				type: String,
+				reflectToAttribute: true,
+				value: ""
+			},
+			elevation: {
+				type: Number,
+				reflectToAttribute: true,
+				value: 1
+			},
+			selected: {
+				type: Boolean,
+				value: false
+			}
+		},
+		// gesture listeners: down, up, tap, track
+		listeners: {
+			tap: 'tapAction'
+		},
+		// lifecycle functions: created, attached, detached, ready, attributeChanged
+		// we attach additional listeners here which are not available as Polymer listeners
+		attached: function() {
+			this.addEventListener('mouseenter', function (e) {
+				this.selectAction();
+			});
+			this.addEventListener('mouseleave', function (e) {
+				this.unselectAction();
+			});
+		},
+		// custom functions: anything you want - this is the prototype of your object
+		tapAction: function(e) {
+			if (!this.selected)
+				this.selectAction();
+			else
+				this.unselectAction();
+		},
+		selectAction: function(e) {
+			if (!this.selected)
+			{
+				this.selected = true;
+				this.elevation+=2;
+			}
+		},
+		unselectAction: function(e) {
+			if (this.selected)
+			{
+				this.selected = false;
+				this.elevation-=2;
+			}
+		},
+		closeAction: function(e) {
+			e.stopPropagation();
+			var card = e.target.parentNode.parentNode.parentNode;
+			card.classList.add('closing');
+			var ctrl = document.querySelector('greetings-list');
+			var uid = this.uid;
+			if (ctrl != null)
+				window.setTimeout(function() {ctrl.del(uid);}, 250);
+		}
+	});
+</script>
