@@ -1,9 +1,8 @@
-﻿<!DOCTYPE HTML>
-
-<link rel="import" href="bower_components/paper-material/paper-material.html">
+﻿<link rel="import" href="bower_components/paper-material/paper-material.html">
 <link rel="import" href="bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
 <link rel="import" href="bower_components/paper-styles/paper-styles.html">
+<link rel="import" href="bower_components/iron-flex-layout/iron-flex-layout.html">
 
 <dom-module id="paper-card">
 	<style>
@@ -22,13 +21,18 @@
 			border-radius: 50%;
 			margin-right: 20px;
 		}
+		
+		.card-header {
+			@apply(--layout-horizontal);
+			@apply(--layout-center);
+		}
 
 		paper-icon-button:hover { color: #444 }
 	</style>
 
 	<template>
 		<paper-material animated elevation="{{elevation}}">
-			<div class="card-header layout horizontal center">
+			<div class="card-header">
 				<content select="img"></content>
 				<h3>{{heading}}</h3>
 			</div>
