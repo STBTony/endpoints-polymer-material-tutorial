@@ -50,8 +50,11 @@
 				var icon = new Image();
 				icon.src = "images/avatar-" + (avatarId + 1) + ".svg";
 				// Unfortunately, you have to use Polymer's DOM manipulation APIs
-				// to add children to the light DOM of a polymer element.
+				// to add children to the light DOM of a polymer element. The regular
+				// JS syntax will work with a native implementation of the shadow DOM:
+				// card.appendChild(icon);
 				Polymer.dom(card).appendChild(icon);
+				
 				card.heading = text;
 				container.appendChild(card);
 			}
