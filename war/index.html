@@ -48,9 +48,9 @@
 				window.setTimeout(function(){display_new_card(id, text, avatarId)}, 300);
 			else {
 				// add it to the data model
-				var model = document.querySelector('greetings-list');
+				var ctrl = document.querySelector('greetings-list');
 				id = id + '/' + Date.now();
-				model.add(new Object({id: id, text: text, avatarSrc: "images/avatar-" + (avatarId + 1) + ".svg"}))
+				ctrl.add(new Object({id: id, text: text, avatarSrc: "images/avatar-" + (avatarId + 1) + ".svg"}))
 			}
 		}
 	
